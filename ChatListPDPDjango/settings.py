@@ -100,7 +100,9 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -114,23 +116,43 @@ JAZZMIN_SETTINGS = {
     "site_title": "PDP Academy Bot",
     "site_header": "PDP Academy Bot",
     "site_brand": "PDP Academy Bot",
-    "site_icon": "images/favicon.png",
-    # Add your own branding here
-    "site_logo": None,
+    # Logo to use for your site, must be present in static files, used for brand on top left
+    "site_logo": "images/pdp.jpg",
+
+    # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
+    "login_logo": "images/pdp.jpg",
+
+    # Logo to use for login form in dark themes (defaults to login_logo)
+    "login_logo_dark": "images/pdp.jpg",
+
+    # CSS classes that are applied to the logo above
+    "site_logo_classes": "img-circle",
+
+    # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
+    "site_icon": "images/pdp.jpg",
+
     "welcome_sign": "Welcome to the PDP Academy Bot",
+
     # Copyright on the footer
     "copyright": "PDP Academy Bot",
+
+    "search_model": ["auth.User", "telegram_users.TelegramUser"],
+
     "user_avatar": None,
+
     ############
     # Top Menu #
     ############
     # Links to put along the top menu
     "topmenu_links": [
         # Url that gets reversed (Permissions can be added)
-        {"name": "PDP Academy", "url": "home", "permissions": ["auth.view_user"]},
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
+
+        {"model": "telegram_users.TelegramUser"}
     ],
+
     #############
     # Side Menu #
     #############
@@ -138,6 +160,7 @@ JAZZMIN_SETTINGS = {
     "show_sidebar": True,
     # Whether to aut expand the menu
     "navigation_expanded": True,
+
     # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
     # for the full list of 5.13.0 free icon classes
     "icons": {
